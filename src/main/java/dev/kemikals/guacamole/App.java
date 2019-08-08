@@ -13,9 +13,9 @@ public class App {
     public static void main(String[] args) throws Exception {
         Config config = new Config();
         jda = new JDABuilder(AccountType.BOT).setToken(config.getDiscordKey()).build();
-        jda.awaitReady();    
         jda.addEventListener(new Hello());
         jda.addEventListener(new Trivia());
         jda.addEventListener(new WeatherCommand(config.getWeatherKey()));
+        jda.awaitReady();
     }
 }

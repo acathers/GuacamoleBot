@@ -1,39 +1,27 @@
 package dev.kemikals.guacamole;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class Config {
 
     private String discordKey;
     private String weatherKey;
 
-
     public Config() {
 
-        try {
-            loadConfig();
+        try (InputStream input = new FileInputStream("conf/settings.properties")) {
+            Properties properties = new Properties();
+            properties.load(input);
+            discordKey = properties.getProperty("discord.key");
+            weatherKey = properties.getProperty("weather.key");
+
         } catch (IOException e) {
-            System.err.println("Cannot read from config file, exiting...");
-            System.exit(0);
+            System.out.println("Cannot read settings file");
         }
-    }
 
-    public void loadConfig() throws IOException {
-        Path path = Path.of("conf", "settings.conf");
-        List<String> configContents = null;
-        configContents = Files.readAllLines(path);
-
-        for (String setting : configContents) {
-            if (setting.startsWith("api_key_discord")) {
-                discordKey = setting.split("=")[1].trim();
-            } else if(setting.startsWith("api_key_weather")){
-                weatherKey = setting.split("=")[1].trim();
-            }
-            
-        }
     }
 
     public String getDiscordKey() {

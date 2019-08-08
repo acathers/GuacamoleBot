@@ -6,15 +6,15 @@ public class Score {
     Member member;
     private int score;
 
-    public Score(Member member){
+    public Score(Member member) {
         this.member = member;
     }
 
-    public void increaseScore(){
+    public void increaseScore() {
         score++;
     }
 
-    public int getScore(){
+    public int getScore() {
         return score;
     }
 
@@ -28,13 +28,11 @@ public class Score {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Member){
-            return ((Member)obj) == this.member;
+        if (obj instanceof Member) {
+            return ((Member) obj) == this.member;
         }
-       
+
         return false;
     }
 
-    
 }
-

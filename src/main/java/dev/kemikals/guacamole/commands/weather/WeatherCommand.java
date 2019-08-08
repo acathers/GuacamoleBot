@@ -11,7 +11,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class WeatherCommand extends ListenerAdapter {
     private String apiKey;
 
-    public WeatherCommand(String apiKey){
+    public WeatherCommand(String apiKey) {
         this.apiKey = apiKey;
     }
 
@@ -19,9 +19,9 @@ public class WeatherCommand extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         TextChannel channel = event.getChannel();
 
-        if(event.getMessage().getContentRaw().startsWith("!weather")){
-        String[] command = event.getMessage().getContentRaw().split(" ");
-            if(command.length == 2){
+        if (event.getMessage().getContentRaw().startsWith("!weather")) {
+            String[] command = event.getMessage().getContentRaw().split(" ");
+            if (command.length == 2) {
                 String weatherQuery = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=imperial&APPID=%s";
                 Gson gson = new Gson();
                 Weather weather = gson.fromJson(getJson(weatherQuery, command[1], apiKey), Weather.class);
@@ -37,15 +37,12 @@ public class WeatherCommand extends ListenerAdapter {
         }
     }
 
-    
-
-    
     public static String getJson(String query, String input, String apikey) {
         String inline = "";
 
         try {
             URL url = new URL(String.format(query, input.trim(), apikey));
-        
+
             Scanner sc = new Scanner(url.openStream());
 
             while (sc.hasNext()) {
