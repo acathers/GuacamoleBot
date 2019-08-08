@@ -23,6 +23,11 @@
     <name>jcenter-bintray</name>
     <url>http://jcenter.bintray.com</url>
 </repository>
+<repository>
+  <id>minecraft-libraries</id>
+  <name>Minecraft Libraries</name>
+  <url>https://libraries.minecraft.net</url>
+</repository>
      </repositories>
   <dependencies>
     <dependency>
@@ -47,6 +52,11 @@
         <artifactId>slf4j-api</artifactId>
         <version>1.7.26</version>
     </dependency>
+    <dependency>
+    <groupId>com.mojang</groupId>
+    <artifactId>brigadier</artifactId>
+    <version>1.0.17</version>
+</dependency>
   </dependencies>
 
   <build>

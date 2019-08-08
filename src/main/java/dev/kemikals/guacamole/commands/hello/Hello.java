@@ -13,7 +13,7 @@ public class Hello extends ListenerAdapter {
         List<Member> members = event.getMessage().getMentionedMembers();
         if (!members.isEmpty()) {
             if (members.get(0).getUser() == event.getJDA().getSelfUser()) {
-                event.getChannel().sendMessage("Don't Fn @ me " + event.getAuthor().getName()).queue();
+                event.getChannel().sendMessage("Don't @ me " + event.getAuthor().getName()).queue();
             }
         }
 
