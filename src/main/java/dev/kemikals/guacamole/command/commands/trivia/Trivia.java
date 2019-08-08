@@ -1,4 +1,4 @@
-package dev.kemikals.guacamole.commands.trivia;
+package dev.kemikals.guacamole.command.commands.trivia;
 
 import com.google.gson.Gson;
 import net.dv8tion.jda.core.entities.TextChannel;

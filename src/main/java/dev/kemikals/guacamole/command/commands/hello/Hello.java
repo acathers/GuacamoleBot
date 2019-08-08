@@ -1,4 +1,4 @@
-package dev.kemikals.guacamole.commands.hello;
+package dev.kemikals.guacamole.command.commands.hello;
 
 import java.util.List;
 

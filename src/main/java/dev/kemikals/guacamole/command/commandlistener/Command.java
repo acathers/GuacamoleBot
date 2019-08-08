@@ -1,4 +1,4 @@
-package dev.kemikals.guacamole.commandlistener;
+package dev.kemikals.guacamole.command.commandlistener;
 
 public class Command {
     private String command;

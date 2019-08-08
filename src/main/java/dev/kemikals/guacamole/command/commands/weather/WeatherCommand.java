@@ -1,4 +1,4 @@
-package dev.kemikals.guacamole.commands.weather;
+package dev.kemikals.guacamole.command.commands.weather;
 
 import java.io.IOException;
 import java.net.URL;

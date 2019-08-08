@@ -1,5 +1,5 @@
 
-package dev.kemikals.guacamole.commands.weather;
+package dev.kemikals.guacamole.command.commands.weather;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,4 +1,4 @@
-package dev.kemikals.guacamole.commands.trivia;
+package dev.kemikals.guacamole.command.commands.trivia;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

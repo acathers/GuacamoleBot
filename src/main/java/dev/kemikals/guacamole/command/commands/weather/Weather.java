@@ -1,5 +1,5 @@
 
-package dev.kemikals.guacamole.commands.weather;
+package dev.kemikals.guacamole.command.commands.weather;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
