@@ -1,6 +1,7 @@
 package dev.kemikals.guacamole;
 
 
+import dev.kemikals.guacamole.command.commandloader.CommandLoader;
 import dev.kemikals.guacamole.command.commands.hello.Hello;
 import dev.kemikals.guacamole.command.commands.trivia.Trivia;
 import dev.kemikals.guacamole.command.commands.weather.WeatherCommand;
@@ -12,11 +13,14 @@ public class App {
     public static JDA jda;
 
     public static void main(String[] args) throws Exception {
-        Config config = new Config();
+      /*  Config config = new Config();
         jda = new JDABuilder(AccountType.BOT).setToken(config.getDiscordKey()).build();
         jda.addEventListener(new Hello());
         jda.addEventListener(new Trivia());
         jda.addEventListener(new WeatherCommand(config.getWeatherKey()));
-        jda.awaitReady();
+        jda.awaitReady();*/
+        CommandLoader loader = new CommandLoader();
+        loader.loadCommands();
+        
     }
 }

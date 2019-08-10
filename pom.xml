@@ -23,11 +23,16 @@
     <name>jcenter-bintray</name>
     <url>http://jcenter.bintray.com</url>
 </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+</repository>
 <repository>
   <id>minecraft-libraries</id>
   <name>Minecraft Libraries</name>
   <url>https://libraries.minecraft.net</url>
 </repository>
+
      </repositories>
   <dependencies>
     <dependency>
@@ -52,16 +57,36 @@
         <artifactId>slf4j-api</artifactId>
         <version>1.7.26</version>
     </dependency>
+   
     <dependency>
-    <groupId>com.mojang</groupId>
-    <artifactId>brigadier</artifactId>
-    <version>1.0.17</version>
+      <groupId>com.github.I-Al-Istannen</groupId>
+      <artifactId>brigadier</artifactId>
+      <version>7c281a0894</version>
+    </dependency>
+<dependency>
+    <groupId>org.reflections</groupId>
+    <artifactId>reflections</artifactId>
+    <version>0.9.11</version>
 </dependency>
   </dependencies>
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.1</version>
+           <configuration>
+              <!-- switch on dependency-driven aggregation -->
+              <useStandardDocletOptions>false</useStandardDocletOptions>
+
+              <includeDependencySources>true</includeDependencySources>
+               <dependencySourceInclude>net.dv8tion*</dependencySourceInclude>
+
+
+              </configuration>
+   </plugin>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
