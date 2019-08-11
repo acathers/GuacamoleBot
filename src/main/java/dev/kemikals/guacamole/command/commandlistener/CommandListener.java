@@ -1,6 +1,7 @@
 package dev.kemikals.guacamole.command.commandlistener;
 
 import java.util.HashMap;
+import dev.kemikals.guacamole.command.Context;
 import dev.kemikals.guacamole.command.commandloader.CommandLoader;
 import dev.kemikals.guacamole.commands.GuacamoleCommand;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
@@ -19,14 +20,13 @@ public class CommandListener extends ListenerAdapter {
 
   @Override
   public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-
+    
     String command = event.getMessage().getContentRaw().trim();
 
     if (channelCommands.containsKey(command)) {
-      channelCommands.get(command).execute(event.getChannel());
+      channelCommands.get(command).execute(new Context(event.getAuthor(), event.getMember(), event.getChannel()));
     }
 
   }
-
 
 }
