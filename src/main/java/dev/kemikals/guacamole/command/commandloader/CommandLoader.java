@@ -7,12 +7,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.reflections.Reflections;
-import dev.kemikals.guacamole.App;
 import dev.kemikals.guacamole.command.commandloader.annotations.ChannelCommand;
 import dev.kemikals.guacamole.command.commandloader.annotations.MentionCommand;
 import dev.kemikals.guacamole.command.commandloader.annotations.PrivateCommand;
 import dev.kemikals.guacamole.commands.GuacamoleCommand;
-import net.dv8tion.jda.core.entities.TextChannel;
 
 public class CommandLoader {
 
