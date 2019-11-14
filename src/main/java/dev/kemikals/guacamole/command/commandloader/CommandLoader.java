@@ -1,12 +1,13 @@
 package dev.kemikals.guacamole.command.commandloader;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import org.reflections.Reflections;
+
 import dev.kemikals.guacamole.command.commandloader.annotations.ChannelCommand;
 import dev.kemikals.guacamole.command.commandloader.annotations.MentionCommand;
 import dev.kemikals.guacamole.command.commandloader.annotations.PrivateCommand;
@@ -28,14 +29,11 @@ public class CommandLoader {
 
     @SuppressWarnings("unchecked")
     List<GuacamoleCommand> commandsSet =
-        (List<GuacamoleCommand>) getCommandsToLoad(typeToLoad).stream().map(e -> {
+        (List<GuacamoleCommand>) getCommandsToLoad(typeToLoad).stream().map(c -> {
           try {
-            return e.getConstructor().newInstance();
-
-          } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-              | InvocationTargetException | NoSuchMethodException | SecurityException e1) {
-
-            e1.printStackTrace();
+            return c.getConstructor().newInstance();
+          } catch (ReflectiveOperationException e) {
+            e.printStackTrace();
           }
           return null;
         }).collect(Collectors.toList());

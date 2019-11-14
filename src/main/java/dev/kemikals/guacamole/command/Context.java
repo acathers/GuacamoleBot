@@ -14,8 +14,6 @@ public class Context {
   private Message message;
   private Guild guild;
 
-
-
   public Context(User user, Member member, TextChannel channel, Message message, Guild guild) {
     this.user = user;
     this.member = member;
@@ -31,7 +29,6 @@ public class Context {
   public Context(User user, Member member, Message message) {
     this(user, member, null, message, null);
   }
-
 
   public User getUser() {
     return user;
@@ -52,7 +49,5 @@ public class Context {
   public Guild getGuild() {
     return guild;
   }
-
-
 
 }

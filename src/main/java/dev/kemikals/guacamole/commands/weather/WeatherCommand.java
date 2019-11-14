@@ -20,22 +20,16 @@ public class WeatherCommand implements GuacamoleCommand {
   @Override
   public void execute(Context event, String arguments) {
     TextChannel channel = event.getChannel();
-    String[] command = event.getMessage().getContentRaw().split(" ");
-
-    String weatherQuery =
-        "http://api.openweathermap.org/data/2.5/weather?q=%s&units=imperial&APPID=%s";
+    String weatherQuery = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=imperial&APPID=%s";
     Gson gson = new Gson();
-    Weather weather =
-        gson.fromJson(getJson(weatherQuery, arguments, apiKey, channel), Weather.class);
+    Weather weather = gson.fromJson(getJson(weatherQuery, arguments, apiKey, channel), Weather.class);
     if (weather == null)
       return;
     channel.sendMessage("```City: " + weather.getName() + "\nCurrent Temp: " + weather.getMain().getTemp() + "\nMax: "
-        + weather.getMain().getTempMax() + "\nMin: " + weather.getMain().getTempMin()
-        + "\nVisibility: " + weather.getVisibility() + "\nWind Speed: " + weather.getWind().getSpeed() + "```")
-        .queue();
+        + weather.getMain().getTempMax() + "\nMin: " + weather.getMain().getTempMin() + "\nVisibility: "
+        + weather.getVisibility() + "\nWind Speed: " + weather.getWind().getSpeed() + "```").queue();
 
   }
-
 
   public static String getJson(String query, String input, String apikey, TextChannel channel) {
     String inline = "";
@@ -63,12 +57,10 @@ public class WeatherCommand implements GuacamoleCommand {
 
   }
 
-
   @Override
   public String getCommandName() {
     return commandName;
   }
-
 
   @Override
   public Permission getPermissionRequired() {

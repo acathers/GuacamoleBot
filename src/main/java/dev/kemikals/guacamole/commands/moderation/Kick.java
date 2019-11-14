@@ -14,7 +14,6 @@ import net.dv8tion.jda.core.exceptions.PermissionException;
 public class Kick implements GuacamoleCommand {
   private final String commandName = "kick";
   Permission permission = Permission.KICK_MEMBERS;
-  
 
   @Override
   public void execute(Context context, String arguments) {
@@ -26,33 +25,17 @@ public class Kick implements GuacamoleCommand {
       }
       TextChannel channel = context.getChannel();
       try {
-        context.getGuild().getController().kick(member)
-            .queue(success -> channel
-                .sendMessage("Kicked ").append(member.getEffectiveName()).append("! Cya!").queue(),
-                error -> {
-                  // The failure consumer provides a throwable. In this case we want to check for a
-                  // PermissionException.
-                  if (error instanceof PermissionException) {
-                    PermissionException pe = (PermissionException) error;
-                    Permission missingPermission = pe.getPermission(); // If you want to know
-                                                                       // exactly what permission is
-                                                                       // missing, this is how.
-                                                                       // Note: some
-                                                                       // PermissionExceptions have
-                                                                       // no permission provided,
-                                                                       // only an error message!
-
-                    channel.sendMessage("PermissionError kicking [")
-                        .append(member.getEffectiveName()).append("]: ").append(error.getMessage())
-                        .queue();
-                  } else {
-                    channel.sendMessage("Unknown error while kicking [")
-                        .append(member.getEffectiveName()).append("]: <")
-                        .append(error.getClass().getSimpleName()).append(">: ")
-                        .append(error.getMessage()).queue();
-                  }
-                });
-
+        context.getGuild().getController().kick(member).queue(
+            success -> channel.sendMessage("Kicked ").append(member.getEffectiveName()).append("! Cya!").queue(),
+            error -> {
+              if (error instanceof PermissionException) {
+                channel.sendMessage("PermissionError kicking [").append(member.getEffectiveName()).append("]: ")
+                    .append(error.getMessage()).queue();
+              } else {
+                channel.sendMessage("Unknown error while kicking [").append(member.getEffectiveName()).append("]: <")
+                    .append(error.getClass().getSimpleName()).append(">: ").append(error.getMessage()).queue();
+              }
+            });
 
       } catch (HierarchyException e) {
         channel.sendMessage("Sorry dave, I can't do that...").queue();

@@ -21,39 +21,63 @@ public class CommandListener extends ListenerAdapter {
 
   @Override
   public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-    if (!event.getMessage().getContentRaw().startsWith("!")) {
-      return;
+    if (event.getMessage().getContentRaw().startsWith("!")) {
+      handleMessageCommand(event);
     }
-    
 
+    if (event.getMessage().getMentionedUsers().stream().anyMatch(m -> m.isBot())) {
+      handleMentionCommand(event);
+    }
+
+  }
+
+  public void handleMessageCommand(GuildMessageReceivedEvent event) {
     String commandKey = event.getMessage().getContentRaw().trim().split(" ")[0].substring(1);
     String arguments = null;
     if (event.getMessage().getContentRaw().contains(" ")) {
-      arguments = event.getMessage().getContentRaw()
-          .substring(event.getMessage().getContentRaw().indexOf(" "));
+      arguments = event.getMessage().getContentRaw().substring(event.getMessage().getContentRaw().indexOf(" "));
     }
 
     if (channelCommands.containsKey(commandKey)) {
       GuacamoleCommand command = channelCommands.get(commandKey);
       if (event.getMember().hasPermission(command.getPermissionRequired())) {
-        
-        channelCommands.get(commandKey).execute(new Context(event.getAuthor(), event.getMember(),
-            event.getChannel(), event.getMessage(), event.getGuild()), arguments);
+        command.execute(
+            new Context(event.getAuthor(), event.getMember(), event.getChannel(), event.getMessage(), event.getGuild()),
+            arguments);
+      } else {
+        System.out.println("nope");
+      }
+    }
+  }
+
+  public void handleMentionCommand(GuildMessageReceivedEvent event) {
+    String commandKey = event.getMessage().getContentRaw().trim().split(" ")[1];
+    String arguments = null;
+    if (event.getMessage().getContentRaw().contains(" ")) {
+      arguments = event.getMessage().getContentRaw().split(" ", 2)[1];
+    }
+
+    if (mentionCommands.containsKey(commandKey)) {
+      GuacamoleCommand command = mentionCommands.get(commandKey);
+      if (event.getMember().hasPermission(command.getPermissionRequired())) {
+        command.execute(
+            new Context(event.getAuthor(), event.getMember(), event.getChannel(), event.getMessage(), event.getGuild()),
+            arguments);
       } else {
         System.out.println("nope");
       }
     }
 
   }
-  
+
   @Override
   public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
     String message = event.getMessage().getContentRaw();
     String arguments = "";
-    if(privateCommands.containsKey(message)) {
+    if (privateCommands.containsKey(message)) {
       privateCommands.get(message).execute(new Context(event.getAuthor(), null, event.getMessage()), arguments);
     }
-  
+
   }
 
 }
