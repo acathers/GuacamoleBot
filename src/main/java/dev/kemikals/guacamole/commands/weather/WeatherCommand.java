@@ -19,6 +19,12 @@ public class WeatherCommand implements GuacamoleCommand {
 
   @Override
   public void execute(Context event, String arguments) {
+
+    if (arguments == null) {
+      event.getChannel().sendMessage("You need to supply a zip code!").queue();
+      return;
+    }
+
     TextChannel channel = event.getChannel();
     String weatherQuery = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=imperial&APPID=%s";
     Gson gson = new Gson();
