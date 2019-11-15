@@ -41,7 +41,7 @@ buildNumber.properties
 
 #don't remove this or it will publish your api key
 *.conf
-*.properties
+conf/*
 
 .metadata
 bin/
