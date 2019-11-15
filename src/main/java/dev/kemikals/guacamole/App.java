@@ -14,7 +14,5 @@ public class App {
         CommandLoader loader = new CommandLoader();
         jda = new JDABuilder(config.getDiscordKey()).addEventListener(new CommandListener(loader)).build();
         jda.awaitReady();
-        
-        
     }
 }
