@@ -13,7 +13,7 @@ public class sassy implements GuacamoleCommand {
   @Override
   public void execute(Context context, String arguments) {
     context.getUser().openPrivateChannel().queue((channel) -> {
-      channel.sendMessage("Sup ho").queue();
+      channel.sendMessage("What do you want?").queue();
     });
 
   }
